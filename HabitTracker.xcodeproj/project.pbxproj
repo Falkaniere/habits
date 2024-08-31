@@ -16,6 +16,7 @@
 		653CA1A62C82C5F6002732D1 /* HabitTrackerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 653CA1A52C82C5F6002732D1 /* HabitTrackerTests.swift */; };
 		653CA1B02C82C5F6002732D1 /* HabitTrackerUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 653CA1AF2C82C5F6002732D1 /* HabitTrackerUITests.swift */; };
 		653CA1B22C82C5F6002732D1 /* HabitTrackerUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 653CA1B12C82C5F6002732D1 /* HabitTrackerUITestsLaunchTests.swift */; };
+		653CA1C12C82D2B7002732D1 /* Home.swift in Sources */ = {isa = PBXBuildFile; fileRef = 653CA1C02C82D2B7002732D1 /* Home.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -49,6 +50,7 @@
 		653CA1AB2C82C5F6002732D1 /* HabitTrackerUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = HabitTrackerUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		653CA1AF2C82C5F6002732D1 /* HabitTrackerUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HabitTrackerUITests.swift; sourceTree = "<group>"; };
 		653CA1B12C82C5F6002732D1 /* HabitTrackerUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HabitTrackerUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		653CA1C02C82D2B7002732D1 /* Home.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Home.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -99,6 +101,8 @@
 		653CA18D2C82C5F5002732D1 /* HabitTracker */ = {
 			isa = PBXGroup;
 			children = (
+				653CA1BF2C82D298002732D1 /* ViewModel */,
+				653CA1BE2C82D28B002732D1 /* View */,
 				653CA18E2C82C5F5002732D1 /* HabitTrackerApp.swift */,
 				653CA1902C82C5F5002732D1 /* Persistence.swift */,
 				653CA1952C82C5F5002732D1 /* ContentView.swift */,
@@ -133,6 +137,21 @@
 				653CA1B12C82C5F6002732D1 /* HabitTrackerUITestsLaunchTests.swift */,
 			);
 			path = HabitTrackerUITests;
+			sourceTree = "<group>";
+		};
+		653CA1BE2C82D28B002732D1 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				653CA1C02C82D2B7002732D1 /* Home.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		653CA1BF2C82D298002732D1 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = ViewModel;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -267,6 +286,7 @@
 			files = (
 				653CA18F2C82C5F5002732D1 /* HabitTrackerApp.swift in Sources */,
 				653CA1912C82C5F5002732D1 /* Persistence.swift in Sources */,
+				653CA1C12C82D2B7002732D1 /* Home.swift in Sources */,
 				653CA1962C82C5F5002732D1 /* ContentView.swift in Sources */,
 				653CA1942C82C5F5002732D1 /* HabitTracker.xcdatamodeld in Sources */,
 			);
