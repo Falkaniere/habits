@@ -14,6 +14,7 @@ class HabitViewModel: ObservableObject {
     @Published var frequency: HabitFrequency = .daily
     @Published var createdAt: Date = Date()
     @Published var isDone: Bool = false
+    @Published var notificationIDs: [String] = []
     
     private var context: NSManagedObjectContext
     
@@ -30,22 +31,22 @@ class HabitViewModel: ObservableObject {
         newHabit.createdAt = Date()
         newHabit.isDone = isDone
         newHabit.notificationEnabled = notificationEnabled
-        
-//        NotificationManager.shared.scheduleNotification(title: "Habit Reminder", body: "Don't forget to complete your habit!", triggerDate: someDate)
+        newHabit.notificationIDs = notificationIDs
         
         do {
+            let notificationIdentifier = scheduleNotification(for: newHabit, at: notificationDate)
+            newHabit.notificationIDs?.append(notificationIdentifier)
             try context.save()
-            scheduleNotification(for: newHabit, at: notificationDate)
         } catch {
             print("Error saving new habit: \(error.localizedDescription)")
         }
     }
     
-    func scheduleNotification(for habit: Habit, at date: Date) {
+    func scheduleNotification(for habit: Habit, at date: Date) -> String {
         let title = habit.title ?? "Habit Reminder"
         let body = habit.notificationText ?? "Don't forget to complete your habit!"
         
-        HabitTracker.scheduleNotification(title: title, body: body, triggerDate: date)
+        return HabitTracker.scheduleNotification(title: title, body: body, triggerDate: date)
     }
 }
 
