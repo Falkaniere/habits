@@ -26,11 +26,11 @@ Habit Tracker is an iOS app designed to help you build and maintain habits effec
 
 1. Clone this repository:
     ```bash
-    git clone https://github.com/your-username/habit-tracker.git
+    git clone https://github.com/Falkaniere/habits.git
     ```
 2. Open the project in Xcode:
     ```bash
-    cd habit-tracker
+    cd HabitTracker
     open HabitTracker.xcodeproj
     ```
 3. Build and run the app on your iOS simulator or device.
