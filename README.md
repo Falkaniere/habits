@@ -61,8 +61,5 @@ The app uses local notifications to remind you of your habits. Make sure to allo
 
 If you'd like to contribute to the project, please fork the repository and submit a pull request.
 
-## License
-
-This project is licensed under the MIT License.
 
 ---
