@@ -10,7 +10,7 @@ struct Home: View {
     )
     var fetchedHabits: FetchedResults<Habit>
     
-    @State private var habits: [Habit] = []
+    @State var habits: [Habit] = []
     @State var isAddingNewHabit: Bool = false
     @EnvironmentObject var habitModel: HabitViewModel
     
@@ -25,7 +25,6 @@ struct Home: View {
                             Image(systemName: habit.isDone ? "checkmark.square.fill" : "square")
                                 .font(.system(size: 24))
                         }
-                        .buttonStyle(PlainButtonStyle())
 
                         NavigationLink(destination: HabitDetail(habit: habit)) {
                             HabitCard(

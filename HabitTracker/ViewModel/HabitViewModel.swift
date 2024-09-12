@@ -34,7 +34,8 @@ class HabitViewModel: ObservableObject {
         newHabit.notificationIDs = notificationIDs
         
         do {
-            let notificationIdentifier = scheduleNotification(for: newHabit, at: notificationDate)
+            // Schedule notification based on frequency
+            let notificationIdentifier = scheduleNotification(for: newHabit, at: notificationDate, frequency: newHabit.frequency ?? "Daily")
             newHabit.notificationIDs?.append(notificationIdentifier)
             try context.save()
         } catch {
@@ -42,11 +43,11 @@ class HabitViewModel: ObservableObject {
         }
     }
     
-    func scheduleNotification(for habit: Habit, at date: Date) -> String {
+    func scheduleNotification(for habit: Habit, at date: Date, frequency: String) -> String {
         let title = habit.title ?? "Habit Reminder"
         let body = habit.notificationText ?? "Don't forget to complete your habit!"
         
-        return HabitTracker.scheduleNotification(title: title, body: body, triggerDate: date)
+        return HabitTracker.scheduleNotification(title: title, body: body, triggerDate: date, frequency: frequency)
     }
 }
 

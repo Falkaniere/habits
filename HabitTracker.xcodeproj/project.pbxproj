@@ -13,10 +13,9 @@
 		653CA1962C82C5F5002732D1 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 653CA1952C82C5F5002732D1 /* ContentView.swift */; };
 		653CA1982C82C5F5002732D1 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 653CA1972C82C5F5002732D1 /* Assets.xcassets */; };
 		653CA19C2C82C5F5002732D1 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 653CA19B2C82C5F5002732D1 /* Preview Assets.xcassets */; };
-		653CA1A62C82C5F6002732D1 /* HabitTrackerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 653CA1A52C82C5F6002732D1 /* HabitTrackerTests.swift */; };
-		653CA1B02C82C5F6002732D1 /* HabitTrackerUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 653CA1AF2C82C5F6002732D1 /* HabitTrackerUITests.swift */; };
-		653CA1B22C82C5F6002732D1 /* HabitTrackerUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 653CA1B12C82C5F6002732D1 /* HabitTrackerUITestsLaunchTests.swift */; };
+		653CA1A62C82C5F6002732D1 /* HabitViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 653CA1A52C82C5F6002732D1 /* HabitViewModelTests.swift */; };
 		653CA1C12C82D2B7002732D1 /* Home.swift in Sources */ = {isa = PBXBuildFile; fileRef = 653CA1C02C82D2B7002732D1 /* Home.swift */; };
+		65916B332C891AB50093E342 /* SnackbarManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65916B322C891AB50093E342 /* SnackbarManager.swift */; };
 		65E5E5352C84C0B5003957D6 /* HabitDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65E5E5342C84C0B5003957D6 /* HabitDetailView.swift */; };
 		65E5E5382C84C152003957D6 /* HabitCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65E5E5372C84C152003957D6 /* HabitCard.swift */; };
 		65E5E53D2C84C468003957D6 /* HabitViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65E5E53C2C84C468003957D6 /* HabitViewModel.swift */; };
@@ -37,13 +36,6 @@
 			remoteGlobalIDString = 653CA18A2C82C5F5002732D1;
 			remoteInfo = HabitTracker;
 		};
-		653CA1AC2C82C5F6002732D1 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 653CA1832C82C5F5002732D1 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 653CA18A2C82C5F5002732D1;
-			remoteInfo = HabitTracker;
-		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
@@ -56,11 +48,9 @@
 		653CA1992C82C5F5002732D1 /* HabitTracker.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = HabitTracker.entitlements; sourceTree = "<group>"; };
 		653CA19B2C82C5F5002732D1 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		653CA1A12C82C5F6002732D1 /* HabitTrackerTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = HabitTrackerTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		653CA1A52C82C5F6002732D1 /* HabitTrackerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HabitTrackerTests.swift; sourceTree = "<group>"; };
-		653CA1AB2C82C5F6002732D1 /* HabitTrackerUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = HabitTrackerUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		653CA1AF2C82C5F6002732D1 /* HabitTrackerUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HabitTrackerUITests.swift; sourceTree = "<group>"; };
-		653CA1B12C82C5F6002732D1 /* HabitTrackerUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HabitTrackerUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		653CA1A52C82C5F6002732D1 /* HabitViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HabitViewModelTests.swift; sourceTree = "<group>"; };
 		653CA1C02C82D2B7002732D1 /* Home.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Home.swift; sourceTree = "<group>"; };
+		65916B322C891AB50093E342 /* SnackbarManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SnackbarManager.swift; sourceTree = "<group>"; };
 		65E5E5342C84C0B5003957D6 /* HabitDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HabitDetailView.swift; sourceTree = "<group>"; };
 		65E5E5372C84C152003957D6 /* HabitCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HabitCard.swift; sourceTree = "<group>"; };
 		65E5E53C2C84C468003957D6 /* HabitViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HabitViewModel.swift; sourceTree = "<group>"; };
@@ -86,13 +76,6 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		653CA1A82C82C5F6002732D1 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
@@ -101,7 +84,6 @@
 			children = (
 				653CA18D2C82C5F5002732D1 /* HabitTracker */,
 				653CA1A42C82C5F6002732D1 /* HabitTrackerTests */,
-				653CA1AE2C82C5F6002732D1 /* HabitTrackerUITests */,
 				653CA18C2C82C5F5002732D1 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -111,7 +93,6 @@
 			children = (
 				653CA18B2C82C5F5002732D1 /* HabitTracker.app */,
 				653CA1A12C82C5F6002732D1 /* HabitTrackerTests.xctest */,
-				653CA1AB2C82C5F6002732D1 /* HabitTrackerUITests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -146,18 +127,9 @@
 		653CA1A42C82C5F6002732D1 /* HabitTrackerTests */ = {
 			isa = PBXGroup;
 			children = (
-				653CA1A52C82C5F6002732D1 /* HabitTrackerTests.swift */,
+				653CA1A52C82C5F6002732D1 /* HabitViewModelTests.swift */,
 			);
 			path = HabitTrackerTests;
-			sourceTree = "<group>";
-		};
-		653CA1AE2C82C5F6002732D1 /* HabitTrackerUITests */ = {
-			isa = PBXGroup;
-			children = (
-				653CA1AF2C82C5F6002732D1 /* HabitTrackerUITests.swift */,
-				653CA1B12C82C5F6002732D1 /* HabitTrackerUITestsLaunchTests.swift */,
-			);
-			path = HabitTrackerUITests;
 			sourceTree = "<group>";
 		};
 		653CA1BE2C82D28B002732D1 /* View */ = {
@@ -190,6 +162,7 @@
 			children = (
 				65E5E5412C8759B3003957D6 /* CoreData+Extensions.swift */,
 				65E5E54B2C88C668003957D6 /* ScheduleNotification.swift */,
+				65916B322C891AB50093E342 /* SnackbarManager.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -258,24 +231,6 @@
 			productReference = 653CA1A12C82C5F6002732D1 /* HabitTrackerTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
-		653CA1AA2C82C5F6002732D1 /* HabitTrackerUITests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 653CA1BB2C82C5F6002732D1 /* Build configuration list for PBXNativeTarget "HabitTrackerUITests" */;
-			buildPhases = (
-				653CA1A72C82C5F6002732D1 /* Sources */,
-				653CA1A82C82C5F6002732D1 /* Frameworks */,
-				653CA1A92C82C5F6002732D1 /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				653CA1AD2C82C5F6002732D1 /* PBXTargetDependency */,
-			);
-			name = HabitTrackerUITests;
-			productName = HabitTrackerUITests;
-			productReference = 653CA1AB2C82C5F6002732D1 /* HabitTrackerUITests.xctest */;
-			productType = "com.apple.product-type.bundle.ui-testing";
-		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -291,10 +246,7 @@
 					};
 					653CA1A02C82C5F6002732D1 = {
 						CreatedOnToolsVersion = 15.3;
-						TestTargetID = 653CA18A2C82C5F5002732D1;
-					};
-					653CA1AA2C82C5F6002732D1 = {
-						CreatedOnToolsVersion = 15.3;
+						LastSwiftMigration = 1530;
 						TestTargetID = 653CA18A2C82C5F5002732D1;
 					};
 				};
@@ -314,7 +266,6 @@
 			targets = (
 				653CA18A2C82C5F5002732D1 /* HabitTracker */,
 				653CA1A02C82C5F6002732D1 /* HabitTrackerTests */,
-				653CA1AA2C82C5F6002732D1 /* HabitTrackerUITests */,
 			);
 		};
 /* End PBXProject section */
@@ -336,13 +287,6 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		653CA1A92C82C5F6002732D1 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -354,6 +298,7 @@
 				653CA18F2C82C5F5002732D1 /* HabitTrackerApp.swift in Sources */,
 				653CA1912C82C5F5002732D1 /* Persistence.swift in Sources */,
 				65E5E5352C84C0B5003957D6 /* HabitDetailView.swift in Sources */,
+				65916B332C891AB50093E342 /* SnackbarManager.swift in Sources */,
 				653CA1C12C82D2B7002732D1 /* Home.swift in Sources */,
 				65E5E54C2C88C668003957D6 /* ScheduleNotification.swift in Sources */,
 				653CA1962C82C5F5002732D1 /* ContentView.swift in Sources */,
@@ -372,16 +317,7 @@
 			files = (
 				65E5E54D2C88C668003957D6 /* ScheduleNotification.swift in Sources */,
 				65E5E54A2C88C5E0003957D6 /* NotificationManager.swift in Sources */,
-				653CA1A62C82C5F6002732D1 /* HabitTrackerTests.swift in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		653CA1A72C82C5F6002732D1 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				653CA1B22C82C5F6002732D1 /* HabitTrackerUITestsLaunchTests.swift in Sources */,
-				653CA1B02C82C5F6002732D1 /* HabitTrackerUITests.swift in Sources */,
+				653CA1A62C82C5F6002732D1 /* HabitViewModelTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -392,11 +328,6 @@
 			isa = PBXTargetDependency;
 			target = 653CA18A2C82C5F5002732D1 /* HabitTracker */;
 			targetProxy = 653CA1A22C82C5F6002732D1 /* PBXContainerItemProxy */;
-		};
-		653CA1AD2C82C5F6002732D1 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 653CA18A2C82C5F5002732D1 /* HabitTracker */;
-			targetProxy = 653CA1AC2C82C5F6002732D1 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -596,6 +527,7 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = S357R5N2VM;
@@ -608,6 +540,8 @@
 				SDKROOT = auto;
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator macosx";
 				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_OBJC_BRIDGING_HEADER = "HabitTrackerTests/HabitTrackerTests-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/HabitTracker.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/HabitTracker";
@@ -619,6 +553,7 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = S357R5N2VM;
@@ -631,53 +566,10 @@
 				SDKROOT = auto;
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator macosx";
 				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_OBJC_BRIDGING_HEADER = "HabitTrackerTests/HabitTrackerTests-Bridging-Header.h";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/HabitTracker.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/HabitTracker";
-			};
-			name = Release;
-		};
-		653CA1BC2C82C5F6002732D1 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
-				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = S357R5N2VM;
-				GENERATE_INFOPLIST_FILE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 17.4;
-				MACOSX_DEPLOYMENT_TARGET = 14.4;
-				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.falkaniere.HabitTrackerUITests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SDKROOT = auto;
-				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator macosx";
-				SWIFT_EMIT_LOC_STRINGS = NO;
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_TARGET_NAME = HabitTracker;
-			};
-			name = Debug;
-		};
-		653CA1BD2C82C5F6002732D1 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
-				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = S357R5N2VM;
-				GENERATE_INFOPLIST_FILE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 17.4;
-				MACOSX_DEPLOYMENT_TARGET = 14.4;
-				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.falkaniere.HabitTrackerUITests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SDKROOT = auto;
-				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator macosx";
-				SWIFT_EMIT_LOC_STRINGS = NO;
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_TARGET_NAME = HabitTracker;
 			};
 			name = Release;
 		};
@@ -707,15 +599,6 @@
 			buildConfigurations = (
 				653CA1B92C82C5F6002732D1 /* Debug */,
 				653CA1BA2C82C5F6002732D1 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		653CA1BB2C82C5F6002732D1 /* Build configuration list for PBXNativeTarget "HabitTrackerUITests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				653CA1BC2C82C5F6002732D1 /* Debug */,
-				653CA1BD2C82C5F6002732D1 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
