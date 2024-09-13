@@ -4,9 +4,11 @@ import CoreData
 import UserNotifications
 
 class HabitViewModel: ObservableObject {
-    
+    private var habitService: HabitService
+    private var notificationManager: NotificationManager
+
+    @Published var habits: [Habit] = []
     @Published var addNewHabit: Bool = false
-    
     @Published var title: String = ""
     @Published var notificationText: String = ""
     @Published var notificationEnabled: Bool = false
@@ -16,14 +18,31 @@ class HabitViewModel: ObservableObject {
     @Published var isDone: Bool = false
     @Published var notificationIDs: [String] = []
     
-    private var context: NSManagedObjectContext
+    init(habitService: HabitService, notificationManager: NotificationManager) {
+        self.habitService = habitService
+        self.notificationManager = notificationManager
+    }
     
-    init(context: NSManagedObjectContext) {
-        self.context = context
+    func loadHabits() {
+        habits = habitService.fetchHabits().sorted { !$0.isDone && $1.isDone }
+    }
+
+    func deleteHabits(at offsets: IndexSet) {
+        offsets.forEach { index in
+            let habit = habits[index]
+            habitService.deleteHabit(habit)
+        }
+        loadHabits()
+    }
+
+    func markAsDoneFunc(habit: Habit) {
+        habit.isDone.toggle()
+        habitService.saveHabit(habit)
+        loadHabits()
     }
     
     func addHabit() {
-        let newHabit = Habit(context: context)
+        let newHabit = Habit(context: habitService.context)
         newHabit.title = title
         newHabit.notificationText = notificationText
         newHabit.notificationDate = notificationDate
@@ -34,20 +53,21 @@ class HabitViewModel: ObservableObject {
         newHabit.notificationIDs = notificationIDs
         
         do {
-            // Schedule notification based on frequency
-            let notificationIdentifier = scheduleNotification(for: newHabit, at: notificationDate, frequency: newHabit.frequency ?? "Daily")
+            let notificationIdentifier = scheduleNotification(for: newHabit)
             newHabit.notificationIDs?.append(notificationIdentifier)
-            try context.save()
-        } catch {
-            print("Error saving new habit: \(error.localizedDescription)")
         }
     }
     
-    func scheduleNotification(for habit: Habit, at date: Date, frequency: String) -> String {
+    func scheduleNotification(for habit: Habit) -> String {
         let title = habit.title ?? "Habit Reminder"
         let body = habit.notificationText ?? "Don't forget to complete your habit!"
         
-        return HabitTracker.scheduleNotification(title: title, body: body, triggerDate: date, frequency: frequency)
+        return notificationManager.scheduleNotification(
+            title: title,
+            body: body,
+            triggerDate: notificationDate,
+            frequency: frequency.rawValue
+        )
     }
 }
 

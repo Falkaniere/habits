@@ -10,7 +10,6 @@ struct HabitTrackerApp: App {
         WindowGroup {
             ContentView()
                 .environment(\.managedObjectContext, persistenceController.container.viewContext)
-                .environmentObject(HabitViewModel(context: persistenceController.container.viewContext))
                 .onAppear(perform: requestNotificationPermission)
         }
     }

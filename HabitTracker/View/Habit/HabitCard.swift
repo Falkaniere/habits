@@ -1,10 +1,8 @@
 import SwiftUI
 
 struct HabitCard: View {
-    @Binding var toggleOn: Bool
     let title: String
     let description: String
-    let markAsDone: () -> Void
 
     var body: some View {
         HStack {
@@ -28,14 +26,8 @@ struct HabitCard: View {
 }
 
 #Preview {
-    @State var toggleOn = false
-
     return HabitCard(
-        toggleOn: $toggleOn,
         title: "Test Habit",
-        description: "Test Description",
-        markAsDone: {
-            toggleOn.toggle()
-        }
+        description: "Test Description"
     )
 }

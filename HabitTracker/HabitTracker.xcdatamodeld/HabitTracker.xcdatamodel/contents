@@ -6,7 +6,7 @@
         <attribute name="isDone" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
         <attribute name="notificationDate" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
         <attribute name="notificationEnabled" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
-        <attribute name="notificationIDs" optional="YES" attributeType="Transformable" customClassName="[String]"/>
+        <attribute name="notificationIDs" optional="YES" attributeType="Transformable" valueTransformerName="String" customClassName="[String]"/>
         <attribute name="notificationText" optional="YES" attributeType="String"/>
         <attribute name="title" optional="YES" attributeType="String"/>
     </entity>

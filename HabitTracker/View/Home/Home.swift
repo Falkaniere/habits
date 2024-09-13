@@ -1,44 +1,40 @@
 import SwiftUI
 
 struct Home: View {
-    @Environment(\.managedObjectContext) var context
-
-    @FetchRequest(
-        entity: Habit.entity(),
-        sortDescriptors: [NSSortDescriptor(keyPath: \Habit.createdAt, ascending: false)],
-        animation: .default
-    )
-    var fetchedHabits: FetchedResults<Habit>
-    
-    @State var habits: [Habit] = []
     @State var isAddingNewHabit: Bool = false
-    @EnvironmentObject var habitModel: HabitViewModel
+    @StateObject var habitModel = HabitViewModel(
+        habitService: HabitService(context: PersistenceController.shared.container.viewContext),
+        notificationManager: NotificationManager()
+    )
     
     var body: some View {
         NavigationView {
             List {
-                ForEach(habits, id: \.self) { habit in
+                ForEach(habitModel.habits, id: \.self) { habit in
                     HStack {
                         Button(action: {
-                            markAsDoneFunc(habit: habit)
+                            habitModel.markAsDoneFunc(habit: habit)
                         }) {
                             Image(systemName: habit.isDone ? "checkmark.square.fill" : "square")
                                 .font(.system(size: 24))
                         }
-
-                        NavigationLink(destination: HabitDetail(habit: habit)) {
+                        .buttonStyle(PlainButtonStyle())
+                        .padding(.trailing)
+                        
+                        ZStack {
                             HabitCard(
-                                toggleOn: Binding(
-                                    get: { habit.isDone },
-                                    set: { habit.isDone = $0 }
-                                ),                                title: habit.title ?? "",
-                                description: habit.notificationText ?? "",
-                                markAsDone: {}
+                                title: habit.title ?? "",
+                                description: habit.notificationText ?? ""
                             )
+                            
+                            NavigationLink(destination: HabitDetail(habit: habit)) {
+                                EmptyView()
+                            }
+                            .opacity(0)
                         }
                     }
                 }
-                .onDelete(perform: deleteHabits)
+                .onDelete(perform: habitModel.deleteHabits)
             }
             .listStyle(.grouped)
             .navigationTitle("My habits")
@@ -52,41 +48,12 @@ struct Home: View {
                     }
                 }
             }
-            
         }
-        .sheet(isPresented: $isAddingNewHabit, onDismiss: loadHabits) {
+        .sheet(isPresented: $isAddingNewHabit, onDismiss: habitModel.loadHabits) {
             AddHabit()
                 .environmentObject(habitModel)
         }
-        .onAppear(perform: loadHabits)
+        .onAppear(perform: habitModel.loadHabits)
     }
-    
-    private func loadHabits() {
-        habits = fetchedHabits.sorted { !$0.isDone && $1.isDone }
-    }
-    
-    private func deleteHabits(offsets: IndexSet) {
-        offsets.forEach { index in
-            let habit = habits[index]
-            context.delete(habit)
-        }
-        
-        do {
-            try context.save()
-            loadHabits()
-        } catch {
-            print("Failed to delete habit: \(error.localizedDescription)")
-        }
-    }
-    
-    private func markAsDoneFunc(habit: Habit) {
-        habit.isDone.toggle()
-        
-        do {
-            try context.save()
-            loadHabits()
-        } catch {
-            print("Failed to save habit: \(error.localizedDescription)")
-        }
-    }
+
 }

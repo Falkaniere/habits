@@ -52,14 +52,6 @@ struct AddHabit: View {
     }
 }
 
-
-enum HabitFrequency: String, Codable, CaseIterable {
-    case daily = "Daily"
-    case weekly = "Weekly"
-    case monthly = "Monthly"
-}
-
-
 #Preview {
     AddHabit()
 }
