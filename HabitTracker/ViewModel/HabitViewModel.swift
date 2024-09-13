@@ -5,7 +5,7 @@ import UserNotifications
 
 class HabitViewModel: ObservableObject {
     private var habitService: HabitService
-    private var notificationManager: NotificationManager
+    private var notificationManager: NotificationManagerProtocol
 
     @Published var habits: [Habit] = []
     @Published var addNewHabit: Bool = false
@@ -17,8 +17,8 @@ class HabitViewModel: ObservableObject {
     @Published var createdAt: Date = Date()
     @Published var isDone: Bool = false
     @Published var notificationIDs: [String] = []
-    
-    init(habitService: HabitService, notificationManager: NotificationManager) {
+
+    init(habitService: HabitService, notificationManager: NotificationManagerProtocol) {
         self.habitService = habitService
         self.notificationManager = notificationManager
     }

@@ -3,10 +3,10 @@ import CoreData
 @testable import HabitTracker
 
 class HabitViewModelTests: XCTestCase {
-    
+
     var viewModel: HabitViewModel!
-    var context: NSManagedObjectContext?
-    var notificationManager: NotificationManager!
+    var context: NSManagedObjectContext!
+    var mockNotificationManager: MockNotificationManager!
 
     override func setUpWithError() throws {
         // Set up the in-memory Core Data stack
@@ -17,113 +17,117 @@ class HabitViewModelTests: XCTestCase {
         persistentContainer.loadPersistentStores(completionHandler: { _, error in
             XCTAssertNil(error)
         })
-        
+
         context = persistentContainer.viewContext
-        
-        notificationManager = NotificationManager()
-        
+        mockNotificationManager = MockNotificationManager()
+
         viewModel = HabitViewModel(
-            habitService: HabitService(context: context!),
-            notificationManager: notificationManager
-        )
+            habitService: HabitService(context: context), notificationManager: NotificationManagerProtocol as! NotificationManagerProtocol)
     }
 
-    
     override func tearDownWithError() throws {
         viewModel = nil
         context = nil
-        notificationManager = nil
+        mockNotificationManager = nil
     }
-    
+
+    // MARK: - Test Cases
+
     func testAddHabit() throws {
-        // Given
+        // Given: Set up the ViewModel's state for adding a habit
         viewModel.title = "Test Habit"
         viewModel.notificationText = "Reminder to complete your habit"
         viewModel.notificationEnabled = true
         viewModel.notificationDate = Date().addingTimeInterval(3600) // 1 hour later
         viewModel.frequency = .daily
-        
-        // When
+
+        // When: The addHabit function is called
         viewModel.addHabit()
-        
-        // Then
+
+        // Then: Verify the habit was added to Core Data
         let fetchRequest: NSFetchRequest<Habit> = Habit.fetchRequest()
-        let habits = try context?.fetch(fetchRequest)
-        
-        XCTAssertEqual(habits?.count, 1)
-        XCTAssertEqual(habits?.first?.title, "Test Habit")
-        XCTAssertEqual(habits?.first?.notificationText, "Reminder to complete your habit")
-        XCTAssertTrue(habits?.first?.notificationEnabled ?? false)
-        XCTAssertEqual(habits?.first?.frequency, HabitFrequency.daily.rawValue)
+        let habits = try context.fetch(fetchRequest)
+
+        XCTAssertEqual(habits.count, 1)
+        XCTAssertEqual(habits.first?.title, "Test Habit")
+        XCTAssertEqual(habits.first?.notificationText, "Reminder to complete your habit")
+        XCTAssertTrue(habits.first?.notificationEnabled ?? false)
+        XCTAssertEqual(habits.first?.frequency, HabitFrequency.daily.rawValue)
+
+        // Verify the notification was scheduled
+        XCTAssertTrue(mockNotificationManager.didScheduleNotification)
+        XCTAssertEqual(mockNotificationManager.scheduledNotificationTitle, "Test Habit")
+        XCTAssertEqual(mockNotificationManager.scheduledNotificationBody, "Reminder to complete your habit")
     }
-    
-    func testNotificationScheduling() throws {
-        // Given
-        viewModel.title = "Test Habit with Notification"
-        viewModel.notificationText = "Reminder to complete your habit"
-        viewModel.notificationEnabled = true
-        viewModel.notificationDate = Date().addingTimeInterval(3600) // 1 hour later
-        viewModel.frequency = .daily
-        
-        // When
-        viewModel.addHabit()
-        
-        // Then
-        let fetchRequest: NSFetchRequest<Habit> = Habit.fetchRequest()
-        let habits = try context?.fetch(fetchRequest)
-        
-        let habit = habits?.first
-        XCTAssertNotNil(habit?.notificationIDs)
-        XCTAssertFalse(habit?.notificationIDs?.isEmpty ?? true)
-    }
-    
+
     func testAddHabitWithoutNotification() throws {
-        // Given
+        // Given: Set up ViewModel's state for a habit without notifications
         viewModel.title = "Test Habit without Notification"
         viewModel.notificationEnabled = false
-        
-        // When
+
+        // When: The addHabit function is called
         viewModel.addHabit()
-        
-        // Then
+
+        // Then: Verify the habit was added to Core Data without notifications
         let fetchRequest: NSFetchRequest<Habit> = Habit.fetchRequest()
-        let habits = try context?.fetch(fetchRequest)
-        
-        XCTAssertEqual(habits?.count, 1)
-        XCTAssertEqual(habits?.first?.title, "Test Habit without Notification")
-        XCTAssertTrue(habits?.first?.notificationIDs?.isEmpty ?? false)
+        let habits = try context.fetch(fetchRequest)
+
+        XCTAssertEqual(habits.count, 1)
+        XCTAssertEqual(habits.first?.title, "Test Habit without Notification")
+        XCTAssertFalse(((habits.first?.notificationEnabled) != nil))
+        XCTAssertTrue(habits.first?.notificationIDs?.isEmpty ?? true)
+
+        // Verify no notification was scheduled
+        XCTAssertFalse(mockNotificationManager.didScheduleNotification)
     }
-    
-    func testPerformanceExample() throws {
-        measure {
-            // Performance testing code
-        }
+
+    func testMarkAsDone() throws {
+        // Given: Add a habit and ensure it's marked as not done
+        viewModel.title = "Test Habit"
+        viewModel.addHabit()
+
+        let fetchRequest: NSFetchRequest<Habit> = Habit.fetchRequest()
+        var habits = try context.fetch(fetchRequest)
+        let habit = habits.first
+        XCTAssertFalse(habit?.isDone ?? true)
+
+        // When: Mark the habit as done
+        viewModel.markAsDoneFunc(habit: habit!)
+
+        // Then: Verify the habit is marked as done
+        habits = try context.fetch(fetchRequest)
+        XCTAssertTrue(habits.first?.isDone ?? false)
     }
-    
-    // Mock HabitViewModel to override notification scheduling for tests
-    class MockHabitViewModel: HabitViewModel {
+
+    func testDeleteHabit() throws {
+        // Given: Add a habit and check its presence
+        viewModel.title = "Habit to Delete"
+        viewModel.addHabit()
+
+        let fetchRequest: NSFetchRequest<Habit> = Habit.fetchRequest()
+        var habits = try context.fetch(fetchRequest)
+        XCTAssertEqual(habits.count, 1)
+
+        // When: Delete the habit
+        viewModel.deleteHabits(at: IndexSet(integer: 0))
+
+        // Then: Verify the habit is deleted
+        habits = try context.fetch(fetchRequest)
+        XCTAssertEqual(habits.count, 0)
+    }
+
+    class MockNotificationManager: NotificationManager {
         var didScheduleNotification = false
-        
-        override func scheduleNotification(for habit: Habit) -> String {
+        var scheduledNotificationTitle: String?
+        var scheduledNotificationBody: String?
+
+        override func scheduleNotification(title: String, body: String, triggerDate: Date, frequency: String) -> String {
             didScheduleNotification = true
+            scheduledNotificationTitle = title
+            scheduledNotificationBody = body
             return "mock-notification-id"
         }
     }
-    
-    func testNotificationMocking() throws {
-        // Given
-        let mockViewModel = MockHabitViewModel(
-            habitService: HabitService(context: context!),
-            notificationManager: self
-                .HabitTrackerTests.NotificationManager
-        )
-        mockViewModel.title = "Test Habit"
-        mockViewModel.notificationEnabled = true
-        
-        // When
-        mockViewModel.addHabit()
-        
-        // Then
-        XCTAssertTrue(mockViewModel.didScheduleNotification)
-    }
 }
+
+
