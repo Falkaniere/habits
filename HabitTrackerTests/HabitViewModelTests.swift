@@ -9,7 +9,7 @@ class HabitViewModelTests: XCTestCase {
     var mockNotificationManager: MockNotificationManager!
 
     override func setUpWithError() throws {
-        // Set up the in-memory Core Data stack
+        // Configurando Core Data in-memory
         let persistentContainer = NSPersistentContainer(name: "HabitModel")
         let description = NSPersistentStoreDescription()
         description.type = NSInMemoryStoreType
@@ -21,8 +21,9 @@ class HabitViewModelTests: XCTestCase {
         context = persistentContainer.viewContext
         mockNotificationManager = MockNotificationManager()
 
+        // Inicializando o ViewModel com o serviço de hábitos e o gerenciador de notificações mockado
         viewModel = HabitViewModel(
-            habitService: HabitService(context: context), notificationManager: NotificationManagerProtocol as! NotificationManagerProtocol)
+            habitService: HabitService(context: context), notificationManager: mockNotificationManager as NotificationManagerProtocol)
     }
 
     override func tearDownWithError() throws {
@@ -31,20 +32,27 @@ class HabitViewModelTests: XCTestCase {
         mockNotificationManager = nil
     }
 
-    // MARK: - Test Cases
+    // MARK: - Testes
 
     func testAddHabit() throws {
-        // Given: Set up the ViewModel's state for adding a habit
+        // Configurando o estado do ViewModel para adicionar um hábito
         viewModel.title = "Test Habit"
         viewModel.notificationText = "Reminder to complete your habit"
         viewModel.notificationEnabled = true
-        viewModel.notificationDate = Date().addingTimeInterval(3600) // 1 hour later
+        viewModel.notificationDate = Date().addingTimeInterval(3600) // 1 hora depois
         viewModel.frequency = .daily
 
-        // When: The addHabit function is called
+        // Expectativa para o agendamento da notificação
+        let notificationExpectation = expectation(description: "Notificação agendada")
+
+        mockNotificationManager.onScheduleNotification = {
+            notificationExpectation.fulfill() // Confirma que a notificação foi agendada
+        }
+
+        // Adicionando o hábito
         viewModel.addHabit()
 
-        // Then: Verify the habit was added to Core Data
+        // Verificando se o hábito foi adicionado ao Core Data
         let fetchRequest: NSFetchRequest<Habit> = Habit.fetchRequest()
         let habits = try context.fetch(fetchRequest)
 
@@ -54,35 +62,38 @@ class HabitViewModelTests: XCTestCase {
         XCTAssertTrue(habits.first?.notificationEnabled ?? false)
         XCTAssertEqual(habits.first?.frequency, HabitFrequency.daily.rawValue)
 
-        // Verify the notification was scheduled
+        // Aguardar o agendamento da notificação
+        wait(for: [notificationExpectation], timeout: 1.0)
+
+        // Verificando que a notificação foi realmente agendada
         XCTAssertTrue(mockNotificationManager.didScheduleNotification)
         XCTAssertEqual(mockNotificationManager.scheduledNotificationTitle, "Test Habit")
         XCTAssertEqual(mockNotificationManager.scheduledNotificationBody, "Reminder to complete your habit")
     }
 
     func testAddHabitWithoutNotification() throws {
-        // Given: Set up ViewModel's state for a habit without notifications
+        // Configurando o ViewModel para um hábito sem notificações
         viewModel.title = "Test Habit without Notification"
         viewModel.notificationEnabled = false
 
-        // When: The addHabit function is called
+        // Adicionando o hábito
         viewModel.addHabit()
 
-        // Then: Verify the habit was added to Core Data without notifications
+        // Verificando se o hábito foi adicionado ao Core Data sem notificações
         let fetchRequest: NSFetchRequest<Habit> = Habit.fetchRequest()
         let habits = try context.fetch(fetchRequest)
 
         XCTAssertEqual(habits.count, 1)
         XCTAssertEqual(habits.first?.title, "Test Habit without Notification")
-        XCTAssertFalse(((habits.first?.notificationEnabled) != nil))
+        XCTAssertFalse(habits.first?.notificationEnabled ?? true)
         XCTAssertTrue(habits.first?.notificationIDs?.isEmpty ?? true)
 
-        // Verify no notification was scheduled
+        // Verificando que nenhuma notificação foi agendada
         XCTAssertFalse(mockNotificationManager.didScheduleNotification)
     }
 
     func testMarkAsDone() throws {
-        // Given: Add a habit and ensure it's marked as not done
+        // Adicionando um hábito e verificando se está como não concluído
         viewModel.title = "Test Habit"
         viewModel.addHabit()
 
@@ -91,16 +102,16 @@ class HabitViewModelTests: XCTestCase {
         let habit = habits.first
         XCTAssertFalse(habit?.isDone ?? true)
 
-        // When: Mark the habit as done
+        // Marcando o hábito como concluído
         viewModel.markAsDoneFunc(habit: habit!)
 
-        // Then: Verify the habit is marked as done
+        // Verificando se o hábito foi marcado como concluído
         habits = try context.fetch(fetchRequest)
         XCTAssertTrue(habits.first?.isDone ?? false)
     }
 
     func testDeleteHabit() throws {
-        // Given: Add a habit and check its presence
+        // Adicionando um hábito e verificando se ele foi salvo
         viewModel.title = "Habit to Delete"
         viewModel.addHabit()
 
@@ -108,26 +119,47 @@ class HabitViewModelTests: XCTestCase {
         var habits = try context.fetch(fetchRequest)
         XCTAssertEqual(habits.count, 1)
 
-        // When: Delete the habit
+        // Deletando o hábito
         viewModel.deleteHabits(at: IndexSet(integer: 0))
 
-        // Then: Verify the habit is deleted
+        // Verificando se o hábito foi deletado
         habits = try context.fetch(fetchRequest)
         XCTAssertEqual(habits.count, 0)
     }
 
-    class MockNotificationManager: NotificationManager {
+    // Teste de erro para verificar falhas no agendamento de notificações
+    func testNotificationSchedulingFailure() throws {
+        // Configurando o mock para simular uma falha no agendamento de notificação
+        mockNotificationManager.shouldFail = true
+
+        viewModel.title = "Test Habit"
+        viewModel.notificationEnabled = true
+        viewModel.addHabit()
+
+        // Verificando se o agendamento falhou
+        XCTAssertTrue(mockNotificationManager.didFailToSchedule)
+    }
+
+    // MARK: - MockNotificationManager
+
+    class MockNotificationManager: NotificationManagerProtocol {
         var didScheduleNotification = false
+        var didFailToSchedule = false
         var scheduledNotificationTitle: String?
         var scheduledNotificationBody: String?
+        var shouldFail = false
+        var onScheduleNotification: (() -> Void)?
 
         override func scheduleNotification(title: String, body: String, triggerDate: Date, frequency: String) -> String {
+            if shouldFail {
+                didFailToSchedule = true
+                return ""
+            }
             didScheduleNotification = true
             scheduledNotificationTitle = title
             scheduledNotificationBody = body
+            onScheduleNotification?()
             return "mock-notification-id"
         }
     }
 }
-
-

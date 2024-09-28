@@ -70,7 +70,7 @@ struct FloatingSnackbar: View {
                 Spacer()
             }
             .transition(AnyTransition.move(edge: .top).combined(with: .opacity))
-            .animation(.easeInOut(duration: 1.2))
+            .animation(Animation.easeInOut(duration: 1.0))
             .onTapGesture {
                 withAnimation {
                     snackbarManager.show = false

@@ -5,23 +5,19 @@ import UserNotifications
 struct HabitTrackerApp: App {
     let persistenceController = PersistenceController.shared
     @UIApplicationDelegateAdaptor(AppDelegate.self) var appDelegate
-
+    
     var body: some Scene {
         WindowGroup {
             ContentView()
                 .environment(\.managedObjectContext, persistenceController.container.viewContext)
-                .onAppear(perform: requestNotificationPermission)
-        }
-    }
-    
-    func requestNotificationPermission() {
-        let center = UNUserNotificationCenter.current()
-        center.requestAuthorization(options: [.alert, .sound, .badge]) { granted, error in
-            if granted {
-                print("Notification permission granted")
-            } else {
-                print("Notification permission denied")
-            }
+                .onAppear {
+                    Task {
+                        let isGranted = await NotificationService.checkNotificationPermission()
+                        if !isGranted {
+                            _ = await NotificationService.requestNotificationPermission()
+                        }
+                    }
+                }
         }
     }
 }
