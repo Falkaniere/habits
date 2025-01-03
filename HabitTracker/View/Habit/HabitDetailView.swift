@@ -2,10 +2,22 @@ import SwiftUI
 
 struct HabitDetail: View {
     @Environment(\.managedObjectContext) var context
-    @ObservedObject var habit: Habit
+    @StateObject var habit: Habit
     
     @State private var editDisabled: Bool = true
     @State private var confirmSave: Bool = false
+    
+    private func incrementDailyFrequency() {
+        self.habit.dailyFrequency += 1
+    }
+    
+    private func decrementDailyFrequency() {
+        if !(self.habit.dailyFrequency < 0) {
+            self.habit.dailyFrequency -= 1
+        } else {
+            SnackbarManager.shared.showSnackbar(title: "Value could not be less than 0")
+        }
+    }
     
     var body: some View {
         NavigationView{
@@ -42,6 +54,17 @@ struct HabitDetail: View {
                         }
                     }
                     .pickerStyle(SegmentedPickerStyle())
+                    .disabled(editDisabled)
+                }
+                
+                Section(header: Text("Daily frequency")) {
+                    Stepper {
+                        Text("Should be done \(habit.dailyFrequency) times to be completed")
+                    } onIncrement: {
+                        incrementDailyFrequency()
+                    } onDecrement: {
+                        decrementDailyFrequency()
+                    }
                     .disabled(editDisabled)
                 }
                 

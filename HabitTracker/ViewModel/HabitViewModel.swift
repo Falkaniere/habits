@@ -4,8 +4,8 @@ import CoreData
 import UserNotifications
 
 class HabitViewModel: ObservableObject {
-    private var habitService: HabitService
-    private var notificationManager: NotificationManagerProtocol
+    private let habitService: HabitService
+    private let notificationManager: NotificationManagerProtocol
 
     @Published var habits: [Habit] = []
     @Published var addNewHabit: Bool = false
@@ -17,6 +17,7 @@ class HabitViewModel: ObservableObject {
     @Published var createdAt: Date = Date()
     @Published var isDone: Bool = false
     @Published var notificationIDs: [String] = []
+    @Published var dailyFrequency: Int16 = 0
 
     init(habitService: HabitService, notificationManager: NotificationManagerProtocol) {
         self.habitService = habitService
@@ -24,7 +25,7 @@ class HabitViewModel: ObservableObject {
     }
     
     func loadHabits() {
-        habits = habitService.fetchHabits().sorted { !$0.isDone && $1.isDone }
+        habits = habitService.fetchHabits()
     }
 
     func deleteHabits(at offsets: IndexSet) {
@@ -37,25 +38,35 @@ class HabitViewModel: ObservableObject {
 
     func markAsDoneFunc(habit: Habit) {
         habit.isDone.toggle()
-        habitService.saveHabit(habit)
+        habitService.saveHabit()
         loadHabits()
     }
     
     func addHabit() {
-        let newHabit = Habit(context: habitService.context)
-        newHabit.title = title
-        newHabit.notificationText = notificationText
-        newHabit.notificationDate = notificationDate
-        newHabit.frequency = frequency.rawValue
-        newHabit.createdAt = Date()
-        newHabit.isDone = isDone
-        newHabit.notificationEnabled = notificationEnabled
-        newHabit.notificationIDs = notificationIDs
+        if !(title.isEmpty || notificationText.isEmpty) {
+            SnackbarManager.shared.showSnackbar(title: "Favor preencher titulo e notificação texto")
+        }
+        
+        let newHabit = toFillInHabit(habitToFill: Habit(context: habitService.context))
         
         do {
             let notificationIdentifier = scheduleNotification(for: newHabit)
             newHabit.notificationIDs?.append(notificationIdentifier)
         }
+    }
+    
+    func toFillInHabit(habitToFill: Habit) -> Habit {
+        habitToFill.title = title
+        habitToFill.notificationText = notificationText
+        habitToFill.notificationDate = notificationDate
+        habitToFill.frequency = frequency.rawValue
+        habitToFill.createdAt = Date()
+        habitToFill.isDone = isDone
+        habitToFill.notificationEnabled = notificationEnabled
+        habitToFill.notificationIDs = notificationIDs
+        habitToFill.dailyFrequency = dailyFrequency
+        
+        return habitToFill
     }
     
     func scheduleNotification(for habit: Habit) -> String {
