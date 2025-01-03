@@ -17,7 +17,7 @@ struct AddHabit: View {
                 }
                 
                 Section(header: Text("Description")) {
-                    TextField("Enter habit description", text: $habitDescription)
+                    TextField("Enter habit description", text: $habitDescription, axis: .vertical)
                 }
                 
                 Section(header: Text("Frequency")) {
