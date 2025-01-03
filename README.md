@@ -6,6 +6,11 @@
 
 Habit Tracker is an iOS app designed to help you build and maintain habits effectively. The app allows you to add new habits, set reminders, and track your progress. You can easily mark habits as completed, edit them, disable notifications, or delete them as needed. The habit list automatically updates based on the recurrence you choose—daily, weekly, or monthly.
 
+<img src="https://github.com/user-attachments/assets/2698a2cf-140e-444b-b4f6-6190325fc0f7" width="300" height="700">
+<img src="https://github.com/user-attachments/assets/e6408158-ff49-4468-a122-82699962e13d" width="300" height="700">
+<img src="https://github.com/user-attachments/assets/de9d11a6-f6aa-4ace-b70f-8ef8dd143422" width="300" height="700">
+
+
 ## Features
 
 - **Add New Habit:** Create new habits with a custom title, description, and frequency.
