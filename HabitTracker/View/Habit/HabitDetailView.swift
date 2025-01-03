@@ -35,7 +35,7 @@ struct HabitDetail: View {
                     TextField("Description", text: Binding(
                         get: { habit.notificationText ?? "" },
                         set: { habit.notificationText = $0 }
-                    ))
+                    ), axis: .vertical)
                     .disabled(editDisabled)
                     .bold()
                 }
