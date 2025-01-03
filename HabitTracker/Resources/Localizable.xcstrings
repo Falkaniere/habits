@@ -33,6 +33,9 @@
         }
       }
     },
+    "Daily frequency" : {
+
+    },
     "Description" : {
       "localizations" : {
         "en" : {
@@ -307,6 +310,12 @@
           }
         }
       }
+    },
+    "Should be done %d times to be completed" : {
+
+    },
+    "Should be done %lld times to be completed" : {
+
     },
     "Title" : {
       "localizations" : {

@@ -12,14 +12,14 @@ class HabitService {
         request.sortDescriptors = [NSSortDescriptor(keyPath: \Habit.createdAt, ascending: false)]
         
         do {
-            return try context.fetch(request)
+            return try context.fetch(request).sorted { !$0.isDone && $1.isDone }
         } catch {
             print("Failed to fetch habits: \(error)")
             return []
         }
     }
 
-    func saveHabit(_ habit: Habit) {
+    func saveHabit() {
         do {
             try context.save()
         } catch {
@@ -29,14 +29,6 @@ class HabitService {
 
     func deleteHabit(_ habit: Habit) {
         context.delete(habit)
-        saveContext()
-    }
-    
-    func saveContext() {
-        do {
-            try context.save()
-        } catch {
-            print("Failed to save context: \(error.localizedDescription)")
-        }
+        saveHabit()
     }
 }
