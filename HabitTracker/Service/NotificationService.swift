@@ -8,7 +8,7 @@ class NotificationService {
         do {
             try await center.requestAuthorization(options: [.alert, .sound, .badge])
         } catch {
-            print("error whule try to get location")
+            print("error while try to get location")
         }
     }
     

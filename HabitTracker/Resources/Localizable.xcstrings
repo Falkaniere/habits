@@ -34,7 +34,20 @@
       }
     },
     "Daily frequency" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Daily Frequency"
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Frequência diária"
+          }
+        }
+      }
     },
     "Description" : {
       "localizations" : {
@@ -312,10 +325,36 @@
       }
     },
     "Should be done %d times to be completed" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Should be done %d times to be completed"
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Deverá ser feito %d vezes para ser completo"
+          }
+        }
+      }
     },
     "Should be done %lld times to be completed" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Should be done %d times to be completed"
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Deverá ser feito %d vezes para ser completo"
+          }
+        }
+      }
     },
     "Title" : {
       "localizations" : {

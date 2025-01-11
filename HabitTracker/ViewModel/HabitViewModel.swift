@@ -18,6 +18,8 @@ class HabitViewModel: ObservableObject {
     @Published var isDone: Bool = false
     @Published var notificationIDs: [String] = []
     @Published var dailyFrequency: Int16 = 0
+    @Published var completedDays: [Date] = []
+    @Published var lastDayCompleted: Date = Date()
 
     init(habitService: HabitService, notificationManager: NotificationManagerProtocol) {
         self.habitService = habitService
@@ -65,6 +67,8 @@ class HabitViewModel: ObservableObject {
         habitToFill.notificationEnabled = notificationEnabled
         habitToFill.notificationIDs = notificationIDs
         habitToFill.dailyFrequency = dailyFrequency
+        habitToFill.completedDays = completedDays
+        habitToFill.lastDayCompleted = lastDayCompleted
         
         return habitToFill
     }
