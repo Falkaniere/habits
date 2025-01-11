@@ -108,13 +108,6 @@ struct HabitDetail: View {
     }
 }
 
-struct HabitDetailed {
-    var name: String
-    var description: String
-    var frequency: HabitFrequency
-    var reminderMe: Bool
-}
-
 //#Preview {
 //    HabitDetail(habit: Habit(entity: <#T##NSEntityDescription#>, insertInto: <#T##NSManagedObjectContext?#>))
 //}

@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		650685B02CA7440000BB912B /* AnimatedCheckmarkView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 650685AF2CA7440000BB912B /* AnimatedCheckmarkView.swift */; };
 		650685B22CA7455300BB912B /* NotificationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 650685B12CA7455300BB912B /* NotificationService.swift */; };
 		652375142C9E163F00880670 /* Localizable.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = 652375132C9E163F00880670 /* Localizable.xcstrings */; };
 		653CA18F2C82C5F5002732D1 /* HabitTrackerApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 653CA18E2C82C5F5002732D1 /* HabitTrackerApp.swift */; };
@@ -18,6 +17,8 @@
 		653CA19C2C82C5F5002732D1 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 653CA19B2C82C5F5002732D1 /* Preview Assets.xcassets */; };
 		653CA1A62C82C5F6002732D1 /* HabitViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 653CA1A52C82C5F6002732D1 /* HabitViewModelTests.swift */; };
 		653CA1C12C82D2B7002732D1 /* Home.swift in Sources */ = {isa = PBXBuildFile; fileRef = 653CA1C02C82D2B7002732D1 /* Home.swift */; };
+		656995422D278A230082C5B3 /* HabitModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 656995412D278A230082C5B3 /* HabitModel.swift */; };
+		656995442D3290AA0082C5B3 /* RestartCompletedTasksHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 656995432D3290AA0082C5B3 /* RestartCompletedTasksHelper.swift */; };
 		657E800D2C933AD300EB6C0A /* HabitService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 657E800C2C933AD300EB6C0A /* HabitService.swift */; };
 		658879742C938EF100C432E5 /* HabitFrequency.swift in Sources */ = {isa = PBXBuildFile; fileRef = 658879732C938EF100C432E5 /* HabitFrequency.swift */; };
 		65916B332C891AB50093E342 /* SnackbarManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65916B322C891AB50093E342 /* SnackbarManager.swift */; };
@@ -41,7 +42,6 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		650685AF2CA7440000BB912B /* AnimatedCheckmarkView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimatedCheckmarkView.swift; sourceTree = "<group>"; };
 		650685B12CA7455300BB912B /* NotificationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationService.swift; sourceTree = "<group>"; };
 		652375132C9E163F00880670 /* Localizable.xcstrings */ = {isa = PBXFileReference; lastKnownFileType = text.json.xcstrings; path = Localizable.xcstrings; sourceTree = "<group>"; };
 		653CA18B2C82C5F5002732D1 /* HabitTracker.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HabitTracker.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -55,6 +55,8 @@
 		653CA1A12C82C5F6002732D1 /* HabitTrackerTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = HabitTrackerTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		653CA1A52C82C5F6002732D1 /* HabitViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HabitViewModelTests.swift; sourceTree = "<group>"; };
 		653CA1C02C82D2B7002732D1 /* Home.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Home.swift; sourceTree = "<group>"; };
+		656995412D278A230082C5B3 /* HabitModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HabitModel.swift; sourceTree = "<group>"; };
+		656995432D3290AA0082C5B3 /* RestartCompletedTasksHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestartCompletedTasksHelper.swift; sourceTree = "<group>"; };
 		657E800C2C933AD300EB6C0A /* HabitService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HabitService.swift; sourceTree = "<group>"; };
 		658879732C938EF100C432E5 /* HabitFrequency.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HabitFrequency.swift; sourceTree = "<group>"; };
 		65916B322C891AB50093E342 /* SnackbarManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SnackbarManager.swift; sourceTree = "<group>"; };
@@ -87,7 +89,6 @@
 		650685AE2CA743F100BB912B /* Components */ = {
 			isa = PBXGroup;
 			children = (
-				650685AF2CA7440000BB912B /* AnimatedCheckmarkView.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -113,6 +114,7 @@
 		653CA18D2C82C5F5002732D1 /* HabitTracker */ = {
 			isa = PBXGroup;
 			children = (
+				656995402D278A110082C5B3 /* Model */,
 				650685AE2CA743F100BB912B /* Components */,
 				65E5E5452C88C557003957D6 /* Service */,
 				65E5E5332C841C70003957D6 /* Helpers */,
@@ -163,6 +165,15 @@
 			path = ViewModel;
 			sourceTree = "<group>";
 		};
+		656995402D278A110082C5B3 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				658879732C938EF100C432E5 /* HabitFrequency.swift */,
+				656995412D278A230082C5B3 /* HabitModel.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
 		65E5E5322C841C64003957D6 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
@@ -177,7 +188,7 @@
 			children = (
 				65E5E54B2C88C668003957D6 /* NotificationManager.swift */,
 				65916B322C891AB50093E342 /* SnackbarManager.swift */,
-				658879732C938EF100C432E5 /* HabitFrequency.swift */,
+				656995432D3290AA0082C5B3 /* RestartCompletedTasksHelper.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -312,15 +323,16 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				656995422D278A230082C5B3 /* HabitModel.swift in Sources */,
 				65E5E5442C88C418003957D6 /* AppDelegate.swift in Sources */,
 				653CA18F2C82C5F5002732D1 /* HabitTrackerApp.swift in Sources */,
 				653CA1912C82C5F5002732D1 /* Persistence.swift in Sources */,
 				65E5E5352C84C0B5003957D6 /* HabitDetailView.swift in Sources */,
 				657E800D2C933AD300EB6C0A /* HabitService.swift in Sources */,
 				65916B332C891AB50093E342 /* SnackbarManager.swift in Sources */,
+				656995442D3290AA0082C5B3 /* RestartCompletedTasksHelper.swift in Sources */,
 				653CA1C12C82D2B7002732D1 /* Home.swift in Sources */,
 				65E5E54C2C88C668003957D6 /* NotificationManager.swift in Sources */,
-				650685B02CA7440000BB912B /* AnimatedCheckmarkView.swift in Sources */,
 				653CA1962C82C5F5002732D1 /* ContentView.swift in Sources */,
 				65E5E5382C84C152003957D6 /* HabitCard.swift in Sources */,
 				65E5E5402C84C92C003957D6 /* AddHabit.swift in Sources */,

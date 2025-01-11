@@ -1,8 +1,8 @@
-//
-//  HabitModel.swift
-//  HabitTracker
-//
-//  Created by Jonatas Falkaniere on 02/01/25.
-//
-
 import Foundation
+
+struct HabitDetailed {
+    var name: String
+    var description: String
+    var frequency: HabitFrequency
+    var reminderMe: Bool
+}
