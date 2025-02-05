@@ -1,10 +1,10 @@
 import UserNotifications
 
-protocol NotificationManagerProtocol {
-    func scheduleNotification(title: String, body: String, triggerDate: Date, frequency: String) -> String
-}
+//protocol NotificationManagerProtocol {
+//    func scheduleNotification(title: String, body: String, triggerDate: Date, frequency: String) -> String
+//}
 
-class NotificationManager: NotificationManagerProtocol {
+class NotificationManager {
     
     func scheduleNotification(title: String, body: String, triggerDate: Date, frequency: String) -> String {
         let content = UNMutableNotificationContent()

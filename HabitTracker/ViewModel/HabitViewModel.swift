@@ -40,6 +40,13 @@ class HabitViewModel: ObservableObject {
 
     func markAsDoneFunc(habit: Habit) {
         habit.isDone.toggle()
+        
+        // TODO:
+        // se toggle estiver on, então já foi marcado antes, deverá desmarcar
+        // e tirar o dia de hoje tanto de 'último dia completo' quanto do array de dias completos
+        // add no array de dias completos, se já não tiver o dia de hoje
+        // add data no 'último dia completo'
+        
         habitService.saveHabit()
         loadHabits()
     }
