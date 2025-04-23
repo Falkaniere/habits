@@ -7,19 +7,26 @@ struct Home: View {
         notificationManager: NotificationManager()
     )
     
+//    var progresso: Double {
+//        Double(feitoHoje) / Double(metaDiaria)
+//    }
+    
     var body: some View {
         NavigationView {
             List {
                 ForEach(habitModel.habits, id: \.self) { habit in
                     HStack {
-                        Button(action: {
-                            habitModel.markAsDoneFunc(habit: habit)
-                        }) {
-                            Image(systemName: habit.isDone ? "checkmark.square.fill" : "square")
-                                .font(.system(size: 24))
-                        }
-                        .buttonStyle(PlainButtonStyle())
-                        .padding(.trailing)
+                        HabitProgressBar(progress: CGFloat(habitModel.progress)/CGFloat(habitModel.dailyFrequency))
+                            .frame(width: 16, height: 16)
+                            .padding(.trailing)
+//                        Button(action: {
+//                            habitModel.markAsDoneFunc(habit: habit)
+//                        }) {
+//                            Image(systemName: habit.isDone ? "checkmark.square.fill" : "square")
+//                                .font(.system(size: 24))
+//                        }
+//                        .buttonStyle(PlainButtonStyle())
+//                        .padding(.trailing)
                         
                         ZStack {
                             HabitCard(

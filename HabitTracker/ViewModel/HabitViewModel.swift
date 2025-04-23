@@ -20,6 +20,7 @@ class HabitViewModel: ObservableObject {
     @Published var dailyFrequency: Int16 = 0
     @Published var completedDays: [Date] = []
     @Published var lastDayCompleted: Date = Date()
+    @Published var progress: Int = 0
 
     init(habitService: HabitService, notificationManager: NotificationManagerProtocol) {
         self.habitService = habitService
@@ -69,6 +70,7 @@ class HabitViewModel: ObservableObject {
         habitToFill.dailyFrequency = dailyFrequency
         habitToFill.completedDays = completedDays
         habitToFill.lastDayCompleted = lastDayCompleted
+        habitToFill.progress = 0
         
         return habitToFill
     }
