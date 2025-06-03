@@ -30,6 +30,8 @@
 		65E5E5442C88C418003957D6 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65E5E5432C88C418003957D6 /* AppDelegate.swift */; };
 		65E5E54C2C88C668003957D6 /* NotificationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65E5E54B2C88C668003957D6 /* NotificationManager.swift */; };
 		65E5E54D2C88C668003957D6 /* NotificationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65E5E54B2C88C668003957D6 /* NotificationManager.swift */; };
+		65F8BF9F2DEA4D8300BC6320 /* Habit+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65F8BF9D2DEA4D8300BC6320 /* Habit+CoreDataClass.swift */; };
+		65F8BFA02DEA4D8300BC6320 /* Habit+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65F8BF9E2DEA4D8300BC6320 /* Habit+CoreDataProperties.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -68,6 +70,8 @@
 		65E5E53F2C84C92C003957D6 /* AddHabit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddHabit.swift; sourceTree = "<group>"; };
 		65E5E5432C88C418003957D6 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		65E5E54B2C88C668003957D6 /* NotificationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationManager.swift; sourceTree = "<group>"; };
+		65F8BF9D2DEA4D8300BC6320 /* Habit+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Habit+CoreDataClass.swift"; sourceTree = "<group>"; };
+		65F8BF9E2DEA4D8300BC6320 /* Habit+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Habit+CoreDataProperties.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -99,6 +103,8 @@
 		653CA1822C82C5F5002732D1 = {
 			isa = PBXGroup;
 			children = (
+				65F8BF9D2DEA4D8300BC6320 /* Habit+CoreDataClass.swift */,
+				65F8BF9E2DEA4D8300BC6320 /* Habit+CoreDataProperties.swift */,
 				653CA18D2C82C5F5002732D1 /* HabitTracker */,
 				653CA1A42C82C5F6002732D1 /* HabitTrackerTests */,
 				653CA18C2C82C5F5002732D1 /* Products */,
@@ -342,6 +348,8 @@
 				65E5E5402C84C92C003957D6 /* AddHabit.swift in Sources */,
 				650685B22CA7455300BB912B /* NotificationService.swift in Sources */,
 				658879742C938EF100C432E5 /* HabitFrequency.swift in Sources */,
+				65F8BF9F2DEA4D8300BC6320 /* Habit+CoreDataClass.swift in Sources */,
+				65F8BFA02DEA4D8300BC6320 /* Habit+CoreDataProperties.swift in Sources */,
 				65E5E53D2C84C468003957D6 /* HabitViewModel.swift in Sources */,
 				653CA1942C82C5F5002732D1 /* \.xcdatamodeld in Sources */,
 			);

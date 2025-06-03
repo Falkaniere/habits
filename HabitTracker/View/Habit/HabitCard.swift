@@ -7,6 +7,7 @@ struct HabitCard: View {
     var body: some View {
         HStack {
             VStack(alignment: .leading) {
+                HabitProgressBar(progress: 0)
                 Text(title)
                     .font(.system(size: 18))
 
