@@ -16,9 +16,7 @@ struct Home: View {
             List {
                 ForEach(habitModel.habits, id: \.self) { habit in
                     HStack {
-                        HabitProgressBar(progress: CGFloat(habitModel.progress)/CGFloat(habitModel.dailyFrequency))
-                            .frame(width: 16, height: 16)
-                            .padding(.trailing)
+    
 //                        Button(action: {
 //                            habitModel.markAsDoneFunc(habit: habit)
 //                        }) {
@@ -31,7 +29,8 @@ struct Home: View {
                         ZStack {
                             HabitCard(
                                 title: habit.title ?? "",
-                                description: habit.notificationText ?? ""
+                                description: habit.notificationText ?? "",
+                                habitProgess: CGFloat(habit.progress)
                             )
                             
                             NavigationLink(destination: HabitDetail(habit: habit)) {
@@ -64,3 +63,8 @@ struct Home: View {
     }
 
 }
+
+#Preview {
+    Home()
+}
+

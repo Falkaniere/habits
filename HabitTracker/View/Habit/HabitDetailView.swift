@@ -2,25 +2,27 @@ import SwiftUI
 
 struct HabitDetail: View {
     @Environment(\.managedObjectContext) var context
-    @StateObject var habit: Habit
+    @ObservedObject var habit: Habit
     
     @State private var editDisabled: Bool = true
     @State private var confirmSave: Bool = false
+
+    @State private var selectedFrequency: HabitFrequency = .daily
     
     private func incrementDailyFrequency() {
-        self.habit.dailyFrequency += 1
+        self.habit.totalFrequency += 1
     }
     
     private func decrementDailyFrequency() {
-        if !(self.habit.dailyFrequency < 0) {
-            self.habit.dailyFrequency -= 1
+        if !(self.habit.totalFrequency < 0) {
+            self.habit.totalFrequency -= 1
         } else {
             SnackbarManager.shared.showSnackbar(title: "Value could not be less than 0")
         }
     }
     
     var body: some View {
-        NavigationView{
+        NavigationView {
             Form {
                 Section(header: Text("Title")) {
                     TextField("Habit", text: Binding(
@@ -30,25 +32,18 @@ struct HabitDetail: View {
                     .disabled(editDisabled)
                     .bold()
                 }
-                
+               
                 Section(header: Text("Description")) {
                     TextField("Description", text: Binding(
                         get: { habit.notificationText ?? "" },
                         set: { habit.notificationText = $0 }
-                    ), axis: .vertical)
+                    ))
                     .disabled(editDisabled)
                     .bold()
                 }
-                
+               
                 Section(header: Text("Frequency")) {
-                    Picker("Frequency", selection: Binding<HabitFrequency>(
-                        get: {
-                            HabitFrequency(rawValue: habit.frequency ?? HabitFrequency.daily.rawValue) ?? .daily
-                        },
-                        set: { newValue in
-                            habit.frequency = newValue.rawValue
-                        }
-                    )) {
+                    Picker("Frequency", selection: $selectedFrequency) {
                         ForEach(HabitFrequency.allCases, id: \.self) { frequency in
                             Text(frequency.rawValue).tag(frequency)
                         }
@@ -59,7 +54,7 @@ struct HabitDetail: View {
                 
                 Section(header: Text("Daily frequency")) {
                     Stepper {
-                        Text("Should be done \(habit.dailyFrequency) times to be completed")
+                        Text("Should be done \($habit.frequencyType) times to be completed")
                     } onIncrement: {
                         incrementDailyFrequency()
                     } onDecrement: {
@@ -82,16 +77,16 @@ struct HabitDetail: View {
                     .disabled(editDisabled)
                 }
             }
+            .navigationBarTitle("Detail", displayMode: .inline)
+            .navigationBarItems(trailing: Button(editDisabled ? "Edit" : "Save") {
+                if editDisabled {
+                    editDisabled.toggle()
+                } else {
+                    confirmSave = true
+                    editDisabled.toggle()
+                }
+            })
         }
-        .navigationBarTitle("Detail", displayMode: .inline)
-        .navigationBarItems(trailing: Button(editDisabled ? "Edit" : "Save") {
-            if editDisabled {
-                editDisabled.toggle()
-            } else {
-                confirmSave = true
-                editDisabled.toggle()
-            }
-        })
         .alert("Save changes?", isPresented: $confirmSave) {
             Button("Cancel") {
                 confirmSave = false
@@ -107,7 +102,3 @@ struct HabitDetail: View {
         }
     }
 }
-
-//#Preview {
-//    HabitDetail(habit: Habit(entity: <#T##NSEntityDescription#>, insertInto: <#T##NSManagedObjectContext?#>))
-//}

@@ -1,10 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="23507" systemVersion="24E263" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
-    <entity name="Habit" representedClassName=".Habit" syncable="YES">
-        <attribute name="completedDays" optional="YES" attributeType="Transformable" valueTransformerName="Date" customClassName="[Date]"/>
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="23788.4" systemVersion="24F74" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
+    <entity name="Habit" representedClassName=".Habit" syncable="YES" codeGenerationType="class">
         <attribute name="createdAt" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
-        <attribute name="dailyFrequency" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
-        <attribute name="frequency" optional="YES" attributeType="String"/>
+        <attribute name="currentDoneCount" optional="YES" attributeType="Integer 16" valueTransformerName="Date" defaultValueString="0" usesScalarValueType="YES" customClassName="[Date]"/>
+        <attribute name="frequencyType" optional="YES" attributeType="String"/>
         <attribute name="id" optional="YES" attributeType="UUID" usesScalarValueType="NO"/>
         <attribute name="isDone" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
         <attribute name="lastDayCompleted" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
@@ -12,7 +11,8 @@
         <attribute name="notificationEnabled" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
         <attribute name="notificationIDs" optional="YES" attributeType="Transformable" valueTransformerName="String" customClassName="[String]"/>
         <attribute name="notificationText" optional="YES" attributeType="String"/>
-        <attribute name="progress" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="progress" optional="YES" attributeType="Float" defaultValueString="0" usesScalarValueType="YES"/>
         <attribute name="title" optional="YES" attributeType="String"/>
+        <attribute name="totalFrequency" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
     </entity>
 </model>

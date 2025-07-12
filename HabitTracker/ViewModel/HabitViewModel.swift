@@ -13,12 +13,12 @@ class HabitViewModel: ObservableObject {
     @Published var notificationText: String = ""
     @Published var notificationEnabled: Bool = false
     @Published var notificationDate: Date = Date()
-    @Published var frequency: HabitFrequency = .daily
+    @Published var frequencyType: HabitFrequency = .daily
     @Published var createdAt: Date = Date()
     @Published var isDone: Bool = false
     @Published var notificationIDs: [String] = []
-    @Published var dailyFrequency: Int16 = 0
-    @Published var completedDays: [Date] = []
+    @Published var totalFrequency: Int16 = 0
+    @Published var currentDoneCount: Int16 = 0
     @Published var lastDayCompleted: Date = Date()
     @Published var progress: Int = 0
     @Published var id: UUID = UUID()
@@ -63,13 +63,13 @@ class HabitViewModel: ObservableObject {
         habitToFill.title = title
         habitToFill.notificationText = notificationText
         habitToFill.notificationDate = notificationDate
-        habitToFill.frequency = frequency.rawValue
+        habitToFill.frequencyType = frequencyType.rawValue
         habitToFill.createdAt = Date()
         habitToFill.isDone = isDone
         habitToFill.notificationEnabled = notificationEnabled
         habitToFill.notificationIDs = notificationIDs
-        habitToFill.dailyFrequency = dailyFrequency
-        habitToFill.completedDays = completedDays
+        habitToFill.totalFrequency = totalFrequency
+        habitToFill.currentDoneCount = currentDoneCount
         habitToFill.lastDayCompleted = lastDayCompleted
         habitToFill.progress = 0
         habitToFill.id = id
@@ -85,7 +85,7 @@ class HabitViewModel: ObservableObject {
             title: title,
             body: body,
             triggerDate: notificationDate,
-            frequency: frequency.rawValue
+            frequency: frequencyType.rawValue
         )
     }
 }

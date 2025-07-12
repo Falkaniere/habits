@@ -6,9 +6,9 @@ struct AddHabit: View {
     
     @State private var habitName: String = ""
     @State private var habitDescription: String = ""
-    @State private var frequency: HabitFrequency = .daily
+    @State private var frequencyType: HabitFrequency = .daily
     @State private var date = Date()
-    @State private var dailyFrequency: Int = 0
+    @State private var totalFrequency: Int = 0
     
     var body: some View {
         NavigationView {
@@ -22,7 +22,7 @@ struct AddHabit: View {
                 }
                 
                 Section(header: Text("Frequency")) {
-                    Picker("Frequency", selection: $frequency) {
+                    Picker("Frequency", selection: $frequencyType) {
                         ForEach(HabitFrequency.allCases, id: \.self) { frequency in
                             Text(frequency.rawValue).tag(frequency)
                         }
@@ -32,7 +32,7 @@ struct AddHabit: View {
                 
                 Section(header: Text("Daily frequency")) {
                     Stepper {
-                        Text("Should be done \(dailyFrequency) times to be completed")
+                        Text("Should be done \(totalFrequency) times to be completed")
                     } onIncrement: {
                         incrementDailyFrequency()
                     } onDecrement: {
@@ -56,20 +56,20 @@ struct AddHabit: View {
         habitModel.title = habitName
         habitModel.notificationText = habitDescription
         habitModel.notificationDate = date
-        habitModel.frequency = frequency
+        habitModel.frequencyType = frequencyType
         habitModel.notificationEnabled = true
         habitModel.isDone = false
-        habitModel.dailyFrequency = Int16(dailyFrequency)
+        habitModel.totalFrequency = Int16(totalFrequency)
         habitModel.addHabit()
     }
     
     private func incrementDailyFrequency() {
-        dailyFrequency += 1
+        totalFrequency += 1
     }
     
     private func decrementDailyFrequency() {
-        if dailyFrequency > 0 {
-            dailyFrequency -= 1
+        if totalFrequency > 0 {
+            totalFrequency -= 1
         }
     }
 }

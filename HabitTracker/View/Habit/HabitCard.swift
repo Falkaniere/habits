@@ -3,11 +3,16 @@ import SwiftUI
 struct HabitCard: View {
     let title: String
     let description: String
+    let habitProgess: CGFloat
 
     var body: some View {
         HStack {
+            HabitProgressBar(progress: habitProgess)
+                .frame(width: 16, height: 16)
+                .padding()
+            
             VStack(alignment: .leading) {
-                HabitProgressBar(progress: 0)
+                
                 Text(title)
                     .font(.system(size: 18))
 
@@ -20,6 +25,7 @@ struct HabitCard: View {
             Spacer()
             Image(systemName: "gear")
                 .font(.system(size: 18))
+                .padding()
         }
         .padding(.vertical)
         .frame(maxWidth: .infinity, maxHeight: .infinity)
@@ -29,6 +35,7 @@ struct HabitCard: View {
 #Preview {
     return HabitCard(
         title: "Test Habit",
-        description: "Test Description"
+        description: "Test Description",
+        habitProgess: 0.5
     )
 }
