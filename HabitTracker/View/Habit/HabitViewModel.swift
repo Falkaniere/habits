@@ -6,20 +6,9 @@ import UserNotifications
 class HabitViewModel: ObservableObject {
     private let habitService: HabitService
     private let notificationManager: NotificationManagerProtocol
-
-    @Published var habits: [Habit] = []
-    @Published var addNewHabit: Bool = false
-    @Published var title: String = ""
-    @Published var notificationText: String = ""
-    @Published var notificationEnabled: Bool = false
-    @Published var notificationDate: Date = Date()
-    @Published var frequency: HabitFrequency = .daily
-    @Published var createdAt: Date = Date()
-    @Published var isDone: Bool = false
-    @Published var notificationIDs: [String] = []
-    @Published var dailyFrequency: Int16 = 0
-    @Published var completedDays: [Date] = []
-    @Published var lastDayCompleted: Date = Date()
+    private var habits: [Habit]
+    
+    @Published var habit = HabitModel()
 
     init(habitService: HabitService, notificationManager: NotificationManagerProtocol) {
         self.habitService = habitService
@@ -57,20 +46,14 @@ class HabitViewModel: ObservableObject {
         }
     }
     
-    func toFillInHabit(habitToFill: Habit) -> Habit {
-        habitToFill.title = title
-        habitToFill.notificationText = notificationText
-        habitToFill.notificationDate = notificationDate
-        habitToFill.frequency = frequency.rawValue
-        habitToFill.createdAt = Date()
-        habitToFill.isDone = isDone
-        habitToFill.notificationEnabled = notificationEnabled
-        habitToFill.notificationIDs = notificationIDs
-        habitToFill.dailyFrequency = dailyFrequency
-        habitToFill.completedDays = completedDays
-        habitToFill.lastDayCompleted = lastDayCompleted
-        
-        return habitToFill
+    private func incrementDailyFrequency() {
+        $habit.dailyFrequency += 1
+    }
+    
+    private func decrementDailyFrequency() {
+        if $habit.dailyFrequency > 0 {
+            $habit.dailyFrequency -= 1
+        }
     }
     
     func scheduleNotification(for habit: Habit) -> String {

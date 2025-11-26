@@ -1,8 +1,18 @@
 import Foundation
 
-struct HabitDetailed {
-    var name: String
-    var description: String
-    var frequency: HabitFrequency
-    var reminderMe: Bool
+struct HabitModel {
+    var title = ""
+    var description = ""
+    var notificationText = ""
+    var notificationEnabled = false
+    var notificationDate = Date()
+    var frequency = HabitFrequency.daily
+    var createdAt = Date()
+    var isDone = false
+    var notificationIDs = [""]
+    var dailyFrequency = 0
+    var completedDays = [Date()]
+    var lastDayCompleted = Date()
 }
+
+

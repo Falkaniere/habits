@@ -4,25 +4,19 @@ struct AddHabit: View {
     @Environment(\.presentationMode) var presentationMode
     @EnvironmentObject var habitModel: HabitViewModel
     
-    @State private var habitName: String = ""
-    @State private var habitDescription: String = ""
-    @State private var frequency: HabitFrequency = .daily
-    @State private var date = Date()
-    @State private var dailyFrequency: Int = 0
-    
     var body: some View {
         NavigationView {
             Form {
                 Section(header: Text("Habit Name")) {
-                    TextField("Enter habit name", text: $habitName)
+                    TextField("Enter habit name", text: $habitModel.habit.title)
                 }
                 
-                Section(header: Text("Description")) {
-                    TextField("Enter habit description", text: $habitDescription, axis: .vertical)
+                Section(header: Text("Description")) { 
+                    TextField("Enter habit description", text: $habitModel.habit.habitDescription, axis: .vertical)
                 }
                 
                 Section(header: Text("Frequency")) {
-                    Picker("Frequency", selection: $frequency) {
+                    Picker("Frequency", selection: $habitModel.habit.frequency) {
                         ForEach(HabitFrequency.allCases, id: \.self) { frequency in
                             Text(frequency.rawValue).tag(frequency)
                         }
@@ -32,44 +26,23 @@ struct AddHabit: View {
                 
                 Section(header: Text("Daily frequency")) {
                     Stepper {
-                        Text("Should be done \(dailyFrequency) times to be completed")
+                        Text("Should be done \(habitModel.habit.dailyFrequency) times to be completed")
                     } onIncrement: {
-                        incrementDailyFrequency()
+                        habitModel.incrementDailyFrequency()
                     } onDecrement: {
-                        decrementDailyFrequency()
+                        habitModel.decrementDailyFrequency()
                     }
                 }
                 
-                DatePicker("Remember me at:", selection: $date, displayedComponents: [.hourAndMinute])
+                DatePicker("Remember me at:", selection: $habitModel.habit.notificationDate, displayedComponents: [.hourAndMinute])
             }
             .navigationBarTitle("Add New Habit", displayMode: .inline)
             .navigationBarItems(leading: Button("Cancel") {
                 presentationMode.wrappedValue.dismiss()
             }, trailing: Button("Save") {
-                saveHabit()
+                habitModel.addHabit()
                 presentationMode.wrappedValue.dismiss()
             })
-        }
-    }
-    
-    private func saveHabit() {
-        habitModel.title = habitName
-        habitModel.notificationText = habitDescription
-        habitModel.notificationDate = date
-        habitModel.frequency = frequency
-        habitModel.notificationEnabled = true
-        habitModel.isDone = false
-        habitModel.dailyFrequency = Int16(dailyFrequency)
-        habitModel.addHabit()
-    }
-    
-    private func incrementDailyFrequency() {
-        dailyFrequency += 1
-    }
-    
-    private func decrementDailyFrequency() {
-        if dailyFrequency > 0 {
-            dailyFrequency -= 1
         }
     }
 }

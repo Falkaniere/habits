@@ -24,7 +24,7 @@ class NotificationManager: NotificationManagerProtocol {
             trigger = UNCalendarNotificationTrigger(dateMatching: weeklyTriggerDate, repeats: true)
         
         case "Monthly":
-            let monthlyTriggerDate = Calendar.current.dateComponents([.day, .hour, .minute], from: triggerDate)
+            let monthlyTriggerDate = Calendar.current.dateComponents([.month, .hour, .minute], from: triggerDate)
             trigger = UNCalendarNotificationTrigger(dateMatching: monthlyTriggerDate, repeats: true)
         
         default:
